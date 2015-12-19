@@ -7,6 +7,8 @@ import time
 
 print "hello python!!"
 
+# edit at github
+
 print sys.argv[0]
 if len(sys.argv) > 1:
 	para = sys.argv[1]

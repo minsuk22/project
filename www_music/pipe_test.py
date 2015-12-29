@@ -6,6 +6,7 @@ import subprocess
 import time
 
 #testing...
+#editing at clone
 
 print "hello python!!"
 keycon = "keycon.txt"

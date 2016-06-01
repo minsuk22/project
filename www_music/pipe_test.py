@@ -5,6 +5,7 @@ import os
 import subprocess
 from subprocess import Popen, PIPE
 from time import sleep
+# update to github
 
 #testing...
 #editing at clone

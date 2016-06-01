@@ -9,6 +9,10 @@ print ("===========================================")
 print ("EBS Recording script...")
 print ("===========================================")
 
+temp = {
+	"name" : "temp",
+	"time" : 1
+}
 Pocket_Chinese = {
 	"name" : "Pocket_Chinese",
 	"time" : 10
@@ -28,6 +32,7 @@ e_time = 1805
 p_time = 1808
 
 pgm_she = {
+	100 : temp,
 	500 : Pocket_Chinese,
 	720 : Easy_English,
 	740 : Power_English

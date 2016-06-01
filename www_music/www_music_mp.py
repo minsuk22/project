@@ -6,6 +6,10 @@ import subprocess
 import time
 
 print "hello python!!"
+key_up      = "\x1b[A"
+key_down    = "\x1b[B"
+key_left    = "\x1b[D"
+key_right   = "\x1b[C"
 
 # edit at github
 
@@ -30,19 +34,55 @@ if len(sys.argv) > 1:
 			
 	exit()
 
+www_path = "/home/pi/www"
 
-
-wmf = "www/data/www_music_message.txt"
-keycon = "www/data/keycon.txt"
+wmf = "%s/data/www_music_message.txt"%(www_path)
+keycon = "%s/data/keycon.txt"%(www_path)
 path = "path"
 mode = ""
 if os.path.exists(keycon):
+	fp = open (keycon, "r")
+	key_val = fp.readline().replace("\n", "")
+	fp.close()
+	if key_val == "rew_10":
+		pipe.stdin.write(key_left)
+	if key_val == "rew_60":
+		pipe.stdin.write(key_left)
+		pipe.stdin.write(key_left)
+		pipe.stdin.write(key_left)
+		pipe.stdin.write(key_left)
+		pipe.stdin.write(key_left)
+		pipe.stdin.write(key_left)
+	if key_val == "ff_10":
+		pipe.stdin.write(key_right)
+	if key_val == "ff_60":
+		pipe.stdin.write(key_right)
+		pipe.stdin.write(key_right)
+		pipe.stdin.write(key_right)
+		pipe.stdin.write(key_right)
+		pipe.stdin.write(key_right)
+		pipe.stdin.write(key_right)
+	if key_val == "vol_up":
+		pipe.stdin.write("*")
+	if key_val == "vol_upup":
+		pipe.stdin.write("*")
+		pipe.stdin.write("*")
+		pipe.stdin.write("*")
+		pipe.stdin.write("*")
+		pipe.stdin.write("*")
+	if key_val == "vol_down":
+		pipe.stdin.write("/")
+	if key_val == "vol_downdown":
+		pipe.stdin.write("/")
+		pipe.stdin.write("/")
+		pipe.stdin.write("/")
+		pipe.stdin.write("/")
+		pipe.stdin.write("/")
 	os.system("rm -f %s"%keycon)
 
 num = 0
 while(1):
 	if os.path.exists(keycon):
-		pipe.stdin.write("\x1b[C")
 		os.system("rm -f %s"%keycon)
 	if os.path.exists(wmf):
 		# print ("------------cat----------")
@@ -72,11 +112,11 @@ while(1):
 			# os.system ("ps ax | grep omxplayer | awk '{print \"kill \" $1}' | tcsh")
 		elif um["mode"] == "dir_play":
 			print "dir play"
-			cur_path = "www/%s"%um[path]
+			cur_path = "%s/%s"%(www_path, um[path])
 			os.system ("%s kill"%sys.argv[0])
 			# os.system ("ps ax | grep mplayer | awk '{print \"kill \" $1}' | tcsh")
 			# os.system ("ps ax | grep omxplayer | awk '{print \"kill \" $1}' | tcsh")
-			ls = os.listdir ("www/%s"%um["path"])
+			ls = os.listdir ("%s/%s"%(www_path, um["path"]))
 			fp = open("play_list.lst", "w")
 			for l in ls:
 				fp.write ("%s/%s\n"%(cur_path, l))
@@ -98,7 +138,7 @@ while(1):
 			if um["path"].endswith("avi") or um["path"].endswith("mp4"):
 				# os.system ("/usr/bin/mplayer \"www/%s\"& "%(um["path"]))
 				# os.system ("omxplayer \"www/%s\"& "%(um["path"]))
-				pipe = subprocess.Popen ("omxplayer \"www/%s\"& "%(um["path"]), shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+				pipe = Popen ("omxplayer \"%s/%s\"& "%(www_path, um["path"]), shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 				# os.system ("mplayer \"www/%s\"& "%(um["path"]))
 				print "h1"
 				print ("play process is running...")
@@ -106,7 +146,7 @@ while(1):
 				print "h1"
 				# os.system ("/usr/bin/mplayer \"www/%s\"& "%(um["path"]))
 				# os.system ("omxplayer \"www/%s\"& "%(um["path"]))
-				pipe = subprocess.Popen ("mplayer \"www/%s\"& "%(um["path"]), shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+				pipe = subprocess.Popen ("mplayer \"%s/%s\"& "%(www_path, um["path"]), shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 				# os.system ("mplayer \"www/%s\"& "%(um["path"]))
 				print "h1"
 				print ("play process is running...")

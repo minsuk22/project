@@ -21,7 +21,7 @@ A:hover   {color:blue; text-decoration:none; }
 		$mode = "cd";
 	}
 	if ($dir == "") {
-		$dir = "pi_disk/Yejun";
+		$dir = "../pi_disk/Yejun";
 	}
 	$files = scandir("$dir/");
 	$n = 1;
@@ -58,7 +58,7 @@ A:hover   {color:blue; text-decoration:none; }
 	}
 
 	echo ("<table border=0 cellspacing=0>");
-	echo ("<tr><td colspan=2><image src=pi_disk/album.jpg width=950></td></tr>\n");
+	echo ("<tr><td colspan=2><image src=../pi_disk/album.jpg width=950></td></tr>\n");
 	echo ("<tr><td width=700 height=10></td><td width=220></td></tr>\n");
 	echo ("<tr><td colspan=2 bgcolor=#222222><center><font size=8>예준이 동영상!!!</font></center></td></tr>\n");
 	echo ("<tr><td width=700 height=40></td><td width=220></td></tr>\n");
